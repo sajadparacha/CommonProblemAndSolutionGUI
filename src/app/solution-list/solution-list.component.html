@@ -1,0 +1,21 @@
+<p>solution-list works!</p>
+
+<table class="table">
+    <thead>
+      <tr>
+        
+        <th scope="col">Solution Id</th>
+        <th scope="col">Solution Description</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let solution of solutionList">
+        
+        <td>{{solution.solutionId}}</td>
+        <td>{{solution.solDescription}}</td>
+        
+      </tr>
+      
+    </tbody>
+  </table>

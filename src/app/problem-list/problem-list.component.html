@@ -1,0 +1,27 @@
+<p>problem-list works!</p>
+<table class="table">
+    <thead>
+      <tr>
+        
+        <th scope="col">Problem Id</th>
+        <th scope="col">Problem Description</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let problem of problemList">
+        
+        <td>{{problem.commonProblemId}}</td>
+        <td>{{problem.problemDesc}}</td>
+        <td>
+          <button type="button" class="btn btn-primary" (click)="deleteCommonProblem(problem.commonProblemId)">Delete</button>
+          &nbsp;
+          <button type="button" class="btn btn-primary" (click)="editCommonProblem(problem.commonProblemId)">Edit</button>
+        
+        </td>
+        
+      </tr>
+
+      
+    </tbody>
+  </table>

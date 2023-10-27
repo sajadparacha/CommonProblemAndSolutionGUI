@@ -1,0 +1,31 @@
+<p>application-list works!</p>
+
+<table class="table">
+    <thead>
+      <tr>
+        
+        <th scope="col">Application Name</th>
+        <th scope="col">Applicaiton Description</th>
+        <th scope="col">Applicaiton ID</th>
+        <th scope="col">Action</th>
+        
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let application of applicationList">
+        
+        <td>{{application.applName}}</td>
+        <td>{{application.applDescription}}</td>
+        <td>{{application.applicationId}}</td>
+        <td>
+          <button type="button" class="btn btn-primary" (click)="deleteApplication(application.applicationId)">Delete</button>
+          &nbsp;
+          <button type="button" class="btn btn-primary" (click)="editApplication(application.applicationId)">Edit</button>
+        
+        </td>
+
+      </tr>
+      
+    </tbody>
+  </table>
