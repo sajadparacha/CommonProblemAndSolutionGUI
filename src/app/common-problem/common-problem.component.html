@@ -4,11 +4,11 @@
     
     <div class="mb-3">
       <label for="problemDesc" class="form-label">Problem Description</label>
-      <input type="text" class="form-control" id="problemDesc" [ngModel]="commonProblem.problemDesc">
+      <input type="text" class="form-control" id="problemDesc" name="problemDesc" [(ngModel)]="commonProblem.problemDesc">
     </div>
     <div class="mb-3">
         <label for="commonProblemId" class="form-label">Problem Id</label>
-        <input type="text" class="form-control" id="commonProblemId" [ngModel]="commonProblem.commonProblemId">
+        <input type="text" class="form-control" id="commonProblemId" name="commonProblemId" [(ngModel)]="commonProblem.commonProblemId">
         
       </div>
 
@@ -17,6 +17,10 @@
      
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
+    &nbsp;
+    <button type="button" class="btn btn-primary" (click)="onClear(form)">Clear</button>
+
+    
   </form>
   <app-problem-list></app-problem-list>
 

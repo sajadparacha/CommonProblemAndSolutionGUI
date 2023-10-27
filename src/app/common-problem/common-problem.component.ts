@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonProblemService } from './common-problem.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-common-problem',
@@ -38,6 +39,10 @@ export class CommonProblemComponent implements OnInit {
     console.log(submitedForm);
     this.commonProblem=submitedForm.value;
     this.commonProblemService.saveCommonProblem(this.commonProblem);
+  }
+  onClear(form:NgForm){  
+    form.reset();
+    //this.commonProblemService.commonProblemChanged.next();
   }
 
 }
