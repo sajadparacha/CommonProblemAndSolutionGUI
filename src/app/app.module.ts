@@ -13,9 +13,10 @@ import { ProblemListComponent } from './problem-list/problem-list.component';
 import { SolutionListComponent } from './solution-list/solution-list.component';
 import { ApplicationService } from './application/application.service';
 
-import { SolutionListService } from './solution-list/solution-list.service';
+
 import { FormsModule } from '@angular/forms';
 import { CommonProblemService } from './common-problem/common-problem.service';
+import { SolutionService } from './solution/solution.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { CommonProblemService } from './common-problem/common-problem.service';
     HttpClientModule,
     FormsModule
   ],
-  providers: [ApplicationService,CommonProblemService,SolutionListService],
+  providers: [ApplicationService,CommonProblemService,SolutionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

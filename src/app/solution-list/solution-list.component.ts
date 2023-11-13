@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SolutionListService } from './solution-list.service';
+
+import { SolutionService } from '../solution/solution.service';
 @Component({
   selector: 'app-solution-list',
   templateUrl: './solution-list.component.html',
@@ -7,24 +8,37 @@ import { SolutionListService } from './solution-list.service';
 })
 export class SolutionListComponent implements OnInit {
   
-  solutionListService:SolutionListService;
+  
+  solutionService:SolutionService;
 
-  constructor(solutionListService:SolutionListService){
-    this.solutionListService=solutionListService;
+  constructor(solutionService:SolutionService){
+    this.solutionService=solutionService;
   }
 
   ngOnInit(): void {
-    this.solutionListService.fetchSolutionList();
-    this.solutionListService.solutionListChanged.subscribe(
+    this.solutionService.fetchSolutionList();
+    this.solutionService.solutionListChanged.subscribe(
       ()=>{
-        this.solutionList=this.solutionListService.getSolutionList();
+        this.solutionList=this.solutionService.getSolutionList();
       }
     );
 
   }
 
   solutionList :any;
+  solution={
+    "solutionId": 1,
+    "solDescription": "solution",
+    "seqNumber": 1
+};
 
+  deleteSolution (solutionId:any){
+    this.solutionService.deleteSolution(solutionId);
+  }
+  editSolution(solutionId:any){
+    this.solutionService.fetchSolution(solutionId);
+    
+  } 
 
 
 }

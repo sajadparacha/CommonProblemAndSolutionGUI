@@ -6,7 +6,7 @@
         
         <th scope="col">Solution Id</th>
         <th scope="col">Solution Description</th>
-        
+        <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -14,6 +14,12 @@
         
         <td>{{solution.solutionId}}</td>
         <td>{{solution.solDescription}}</td>
+        <td>
+          <button type="button" class="btn btn-primary" (click)="deleteSolution(solution.solutionId)">Delete</button>
+          &nbsp;
+          <button type="button" class="btn btn-primary" (click)="editSolution(solution.solutionId)">Edit</button>
+        
+        </td>
         
       </tr>
       
