@@ -3,21 +3,29 @@
     <thead>
       <tr>
         
+        <th scope="col">Application ID</th>
+        <th scope="col">Application Description</th>
+       
         <th scope="col">Problem Id</th>
         <th scope="col">Problem Description</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let problem of problemList">
+      <tr *ngFor="let problemMap of problemList">
         
-        <td>{{problem.commonProblemId}}</td>
-        <td>{{problem.problemDesc}}</td>
+        <td>{{problemMap.application.applicationId}}</td>
+        <td>{{problemMap.application.applDescription}}</td>
+        <td>{{problemMap.commonProblem.commonProblemId}}</td>
+        <td>{{problemMap.commonProblem.problemDesc}}</td>
         <td>
-          <button type="button" class="btn btn-primary" (click)="deleteCommonProblem(problem.commonProblemId)">Delete</button>
+          <button type="button" class="btn btn-primary" (click)="deleteCommonProblem(problemMap.commonProblem.commonProblemId)">Delete</button>
           &nbsp;
-          <button type="button" class="btn btn-primary" (click)="editCommonProblem(problem.commonProblemId)">Edit</button>
+          <button type="button" class="btn btn-primary" (click)="editCommonProblem(problemMap.commonProblem.commonProblemId)">Edit</button>
+          &nbsp;
+          <button *ngIf="problemMap.commonProblem.solutions.length!=0" type="button" class="btn btn-primary" (click)="showSolutions(problemMap.commonProblem.commonProblemId,problemMap.application.applicationId)">Show Solutions ({{problemMap.commonProblem.solutions.length}})</button>
         
+
         </td>
         
       </tr>

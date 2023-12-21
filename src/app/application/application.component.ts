@@ -14,6 +14,7 @@ export class ApplicationComponent implements OnInit{
     
   }
   ngOnInit(): void {
+    console.log("application from application");
     //this.application=this.applicationService.getApplication();
     
     // throw new Error('Method not implemented.');

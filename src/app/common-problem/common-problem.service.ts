@@ -7,58 +7,91 @@ import { Subject } from 'rxjs';
 })
 export class CommonProblemService {
   saveCommonProblem(commonProblem:any) {
+    //If problemId is not present than this is a new record to be inserted
+    if(commonProblem.commonProblemId==null || commonProblem.commonProblemId==""){
+        this.http.post(this.commonProblemUrl+'/application/'+commonProblem.applicationId,commonProblem).subscribe(
+          (response:any)=>{
+            
+            console.log("common problem saved");
+            //this.fetchCommonProblemList(commonProblem.applicationId);
+            this.fetchCommonProblemListForApplication(commonProblem.applicationId);
+          } 
+        );
+    } else{
+      //Else it is update request and we should call patch service
+      this.http.patch(this.commonProblemUrl,commonProblem).subscribe(
+        (response:any)=>{
+          console.log("common problem updated  "+response);
+          //this.fetchCommonProblemList();
+          this.fetchCommonProblemListForApplication(commonProblem.applicationId);
+        } 
+      );
+    }
 
-    this.http.post(this.commonProblemUrl,commonProblem).subscribe(
-      (response:any)=>{
-        console.log("common problem saved");
-        this.fetchCommonProblemList();
-      } 
-    );
+
   }
   http:HttpClient;
   commonProblemList:any;
-  commonProblem:any;
+  commonProblemMap:any;
+  commonProblemId:any;
+  applicationId:any;
   problemListChanged=new Subject<void>();
   commonProblemChanged=new Subject<void>();
   
   commonProblemUrl:string='/commonProblemController/';
   constructor(http:HttpClient) {this.http=http }
 
-  fetchCommonProblemList(){
+  // fetchCommonProblemList(){
     
-    this.http.get(this.commonProblemUrl+'/allCommonProblems').subscribe(
+  //   this.http.get(this.commonProblemUrl+'/allCommonProblems').subscribe(
+  //     (response:any)=>{
+  //       console.log("common problem list fetched");
+  //       this.commonProblemList=response;
+  //       console.log(this.commonProblemList);
+        
+  //       this.problemListChanged.next();
+  //     }
+  //   );
+  // }
+
+  fetchCommonProblemListForApplication(applicationId:any){
+    this.applicationId=applicationId;
+    this.http.get(this.commonProblemUrl+'/application/'+applicationId).subscribe(
       (response:any)=>{
-        console.log("common problem list fetched");
+        console.log("common problem list fetched for application "+applicationId);
         this.commonProblemList=response;
         console.log(this.commonProblemList);
         
         this.problemListChanged.next();
       }
     );
+
+
   }
   getProblemList(){
 
     return this.commonProblemList;
   }
   getCommonProblem(){
-    return this.commonProblem;
+    return this.commonProblemMap;
   }
 
   fetchCommonProblem(commonProblemId:any){
+    this.commonProblemId=commonProblemId;
     this.http.get(this.commonProblemUrl+commonProblemId).subscribe(
       (response:any)=>{
         console.log("common problem fetched");
-        this.commonProblem=response;
-        console.log(this.commonProblem);
+        this.commonProblemMap=response;
+        console.log(this.commonProblemMap);
         this.commonProblemChanged.next();
       }
     );
   }
-  deleteCommonProblem(commonProblemId:any){
+deleteCommonProblem(commonProblemId:any){
     this.http.delete(this.commonProblemUrl+commonProblemId).subscribe(
       (response:any)=>{
         console.log("common problem deleted");
-        this.fetchCommonProblemList();
+        this.fetchCommonProblemListForApplication(this.applicationId);
       }
     );
   }

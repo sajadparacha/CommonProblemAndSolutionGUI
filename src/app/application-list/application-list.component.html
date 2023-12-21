@@ -22,6 +22,11 @@
           <button type="button" class="btn btn-primary" (click)="deleteApplication(application.applicationId)">Delete</button>
           &nbsp;
           <button type="button" class="btn btn-primary" (click)="editApplication(application.applicationId)">Edit</button>
+          &nbsp;
+          
+          <button *ngIf="application.commonProblems.length!=0" type="button" class="btn btn-primary" (click)="showProblems(application.applicationId)">Show Common Problems ({{application.commonProblems.length}})</button>
+          &nbsp;
+          <button  type="button" class="btn btn-primary" (click)="addProblems(application.applicationId)">Add Common Problems </button>
         
         </td>
 

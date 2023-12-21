@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SolutionService } from './solution.service';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-solution',
@@ -12,18 +13,22 @@ export class SolutionComponent implements OnInit{
   
   solutionService:SolutionService;
   solution={
-    "solutionId": "1",
-    "solDescription": "solution",
-    "seqNumber": "1"
+    "solutionId": "",
+    "solDescription": "",
+    "seqNumber": ""
     };
     http:HttpClient;
+    commonProblemId:any;
     
-  constructor (solutionService:SolutionService,http:HttpClient){
+  constructor (solutionService:SolutionService,http:HttpClient,private activeRoute: ActivatedRoute,
+    private router: Router){
     this.solutionService=solutionService;
     this.http=http;
   }
   
   ngOnInit(): void {
+    this.commonProblemId=this.activeRoute.snapshot.params['commonProblemId'];
+ 
     this.solutionService.solutionChanged.subscribe(
       ()=>{
         this.solution=this.solutionService.getSolution();
@@ -35,7 +40,7 @@ export class SolutionComponent implements OnInit{
       console.log(submitedForm);
       this.solution=submitedForm.value;
       this.solutionService.saveSolution(this.solution);
-      this.solutionService.fetchSolutionList();
+      this.solutionService.fetchSolutionForGivenProblem(this.commonProblemId);
 
   }
 

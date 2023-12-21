@@ -9,8 +9,10 @@ export class SolutionService {
   getSolution(): any {
     return this.solution;
   }
+  solutionUrl='/solutionController/';
+  problemId:any;
   fetchSolution(solutionId: any) {
-    this.http.get('/solutionController/'+solutionId).subscribe(
+    this.http.get(this.solutionUrl+solutionId).subscribe(
       (response:any)=>{
         console.log("solution fetched");
         this.solution=response;
@@ -19,12 +21,26 @@ export class SolutionService {
       }
     );
   }
+
+  fetchSolutionForGivenProblem(problemId:any){
+    this.problemId=problemId;
+    this.http.get(this.solutionUrl+'/problem/'+problemId+'/allSolutions').subscribe(
+      (response:any)=>{
+        this.solutionList = response;
+        console.log("fetchSolutionForGivenProblem from service");
+        console.log(this.solutionList);
+        console.log("fetchSolutionForGivenProblem");
+        this.solutionListChanged.next();
+      }
+    );
+  }
+ 
   deleteSolution(solutionId: any) {
 
-      this.http.delete('/solutionController/'+solutionId).subscribe(
+      this.http.delete(this.solutionUrl+solutionId).subscribe(
         (response:any)=>{
           console.log("solution deleted");
-          this.fetchSolutionList();
+          this.fetchSolutionForGivenProblem(this.problemId);
         }
       );
       }
@@ -36,37 +52,56 @@ export class SolutionService {
   solutionChanged=new Subject<void>(); 
   constructor(http:HttpClient) {this.http=http; }
   
-  fetchSolutionList(){
-    this.http.get('/solutionController/allSolutions/').subscribe(
-      (response: any) => {
-      this.solutionList = response;
-      console.log("solutionList from service");
-      console.log(this.solutionList);
-      console.log("solutionList");
-      this.solutionListChanged.next();
-      }
-      );
+  // fetchSolutionList(){
+  //   this.http.get('/solutionController/allSolutions/').subscribe(
+  //     (response: any) => {
+  //     this.solutionList = response;
+  //     console.log("solutionList from service");
+  //     console.log(this.solutionList);
+  //     console.log("solutionList");
+  //     this.solutionListChanged.next();
+  //     }
+  //     );
      
-  }
+  // }
   getSolutionList(){
     return this.solutionList;
   }
 
   saveSolution(solution:any){
-    this.http.post('/solutionController/',solution).subscribe(
+    //** If there is no solutionId that means it is a new record
+    if(solution.solutionId==null || solution.solutionId==""){
+    this.http.post(this.solutionUrl,solution).subscribe(
 
       (response:any)=>{
-        console.log("Solution Submited");
-        this.fetchSolutionList();
+        console.log("Solution Saved");
+        //this.fetchSolutionList();
         // this.fetchSolution(solution.solutionId);
+        if(this.problemId!=null){
+          this.fetchSolutionForGivenProblem(this.problemId);
+        }
 
       }
     );
+    }
+    else{
+      this.http.patch(this.solutionUrl,solution).subscribe(
+
+        (response:any)=>{
+          console.log("Solution Patached");
+          //this.fetchSolutionList();
+          // this.fetchSolution(solution.solutionId);
+          if(this.problemId!=null){
+            this.fetchSolutionForGivenProblem(this.problemId);
+          }
+        }
+      );
+    }
   }
 
   // fetchSolution(solutionId:any) {
 
-  //   this.http.get('/solutionController/'+solutionId)
+  //   this.http.get(this.solutionUrl+solutionId)
   //     .subscribe((response: any) => {
   //       this.solution = response;
 

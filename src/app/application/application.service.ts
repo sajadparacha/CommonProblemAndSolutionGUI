@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 // import { ApplicationListService } from '../application-list/application-list.service';
 import { Subject } from 'rxjs';
+import { CommonProblemService } from '../common-problem/common-problem.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class ApplicationService {
   applicationToBeEdited=new Subject<void>();
   applicationList: any;
   http: HttpClient;
+  commonProblemService:CommonProblemService;
 
 
   deleteApplication(applicationId: any) {
@@ -29,10 +31,11 @@ export class ApplicationService {
     );
   }
   
-  constructor(http: HttpClient
+  constructor(http: HttpClient,commonProblemService:CommonProblemService
 
   ) {
     this.http = http;
+    this.commonProblemService=commonProblemService;
     }
 
 
@@ -82,6 +85,13 @@ export class ApplicationService {
 
 
 
+  }
+
+  fetchProblems(applicationId:any){
+    this.commonProblemService.fetchCommonProblemListForApplication(applicationId);
+  }
+  getProblemsSubject(){
+    return this.commonProblemService.problemListChanged;
   }
   getApllicationList() {
     return this.applicationList;

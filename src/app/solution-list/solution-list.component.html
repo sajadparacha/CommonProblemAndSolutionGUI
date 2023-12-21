@@ -4,20 +4,28 @@
     <thead>
       <tr>
         
+        <th scope="col">Application Id</th>
+        <th scope="col">Application Description</th>
+        <th scope="col">Common Problem Id</th>
+        <th scope="col">Common Problem Description</th>
         <th scope="col">Solution Id</th>
         <th scope="col">Solution Description</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let solution of solutionList">
+      <tr *ngFor="let solutionMap of solutionList">
         
-        <td>{{solution.solutionId}}</td>
-        <td>{{solution.solDescription}}</td>
+        <td>{{solutionMap.application.applicationId}}</td>
+        <td>{{solutionMap.application.applDescription}}</td>
+        <td>{{solutionMap.commonProblem.commonProblemId}}</td>
+        <td>{{solutionMap.commonProblem.problemDesc}}</td>
+        <td>{{solutionMap.solution.solutionId}}</td>
+        <td>{{solutionMap.solution.solDescription}}</td>
         <td>
-          <button type="button" class="btn btn-primary" (click)="deleteSolution(solution.solutionId)">Delete</button>
+          <button type="button" class="btn btn-primary" (click)="deleteSolution(solutionMap.solution.solutionId)">Delete</button>
           &nbsp;
-          <button type="button" class="btn btn-primary" (click)="editSolution(solution.solutionId)">Edit</button>
+          <button type="button" class="btn btn-primary" (click)="editSolution(solutionMap.solution.solutionId)">Edit</button>
         
         </td>
         
