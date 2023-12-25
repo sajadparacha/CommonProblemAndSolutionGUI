@@ -71,7 +71,7 @@ export class SolutionService {
   saveSolution(solution:any){
     //** If there is no solutionId that means it is a new record
     if(solution.solutionId==null || solution.solutionId==""){
-    this.http.post(this.solutionUrl,solution).subscribe(
+    this.http.post(this.solutionUrl+'/problem/'+this.problemId,solution).subscribe(
 
       (response:any)=>{
         console.log("Solution Saved");

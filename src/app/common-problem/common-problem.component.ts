@@ -22,7 +22,25 @@ export class CommonProblemComponent implements OnInit {
     //   }
     // ]]'
   };
-  commonProblemMap:any;
+  commonProblemMap=
+
+  
+    {
+        "application": {
+            "applicationId": "",
+            "applDescription": "",
+            "applName": "",
+           
+        },
+        "commonProblem": {
+            "commonProblemId": "",
+            "problemDesc": "",
+            "problemSearchTags": [],
+            "solutions": []
+        }
+    };
+
+
   applicationId:any;
   
   commonProblemService: CommonProblemService;
@@ -53,6 +71,20 @@ export class CommonProblemComponent implements OnInit {
   onClear(form:NgForm){  
     form.reset();
     //this.commonProblemService.commonProblemChanged.next();
+    // this.commonProblemMap= {
+    //   "application": {
+    //       "applicationId": "",
+    //       "applDescription": "",
+    //       "applName": "",
+         
+    //   },
+    //   "commonProblem": {
+    //       "commonProblemId": "",
+    //       "problemDesc": "",
+    //       "problemSearchTags": [],
+    //       "solutions": []
+    //   }
+  //};
   }
 
 }

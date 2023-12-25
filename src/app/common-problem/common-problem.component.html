@@ -4,12 +4,12 @@
     
     <div class="mb-3">
       <label for="problemDesc" class="form-label">Problem Description</label>
-      <input type="text" class="form-control" id="problemDesc" name="problemDesc" [(ngModel)]="commonProblemMap?.commonProblem.problemDesc">
+      <input type="text" class="form-control" id="problemDesc" name="problemDesc" [(ngModel)]="commonProblemMap.commonProblem.problemDesc">
     </div>
     <div class="mb-3">
-        <label for="commonProblemId" class="form-label">Problem Id</label>
-        <input type="text" class="form-control" id="commonProblemId" name="commonProblemId" [(ngModel)]="commonProblemMap?.commonProblem.commonProblemId">
-        <input type="hidden" class="form-control" id="applicationId" name="applicationId" [(ngModel)]="commonProblemMap?.application.applicationId">
+        <!-- <label for="commonProblemId" class="form-label">Problem Id</label> -->
+        <input type="hidden" class="form-control" id="commonProblemId" name="commonProblemId" [(ngModel)]="commonProblemMap.commonProblem.commonProblemId">
+        <input type="hidden" class="form-control" id="applicationId" name="applicationId" [(ngModel)]="commonProblemMap.application.applicationId">
         
       </div>
 
