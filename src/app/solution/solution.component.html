@@ -1,19 +1,20 @@
 <p>solution works!</p>
 
 <form #form="ngForm" (submit)="onSubmit(form)">
-    
-  
+
+
     <div class="mb-3">
       <label for="solDescription" class="form-label">Solution Description</label>
       <input type="text" class="form-control" id="solDescription" name="solDescription" [(ngModel)]="solution.solDescription">
     </div>
     <div class="mb-3">
         <!-- <label for="solutionId" class="form-label">Solution ID</label> -->
-        <input type="hidden" class="form-control" id="solutionId" name="solutionId" [(ngModel)]="solution.solutionId" aria-describedby="emailHelp">
-        
-      </div>
+      <input type="hidden" class="form-control" id="solutionId" name="solutionId" [(ngModel)]="solution.solutionId" aria-describedby="emailHelp">
+      <input type="hidden" class="form-control" id="commonProblemId" name="commonProblemId" [(ngModel)]="solution.commonProblemId" aria-describedby="emailHelp">
 
-    
+    </div>
+
+
     <button type="submit" class="btn btn-primary" >Submit</button>
     &nbsp;&nbsp;
     <button type="button" class="btn btn-primary" (click)="clearForm()" >Clear</button>

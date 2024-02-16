@@ -10,36 +10,40 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
   styleUrls: ['./solution.component.scss']
 })
 export class SolutionComponent implements OnInit{
-  
+
   solutionService:SolutionService;
   solution={
     "solutionId": "",
     "solDescription": "",
-    "seqNumber": ""
+    "seqNumber": "",
+    "commonProblemId":""
     };
     http:HttpClient;
-    commonProblemId:any;
-    
+   commonProblemId:any;
+
   constructor (solutionService:SolutionService,http:HttpClient,private activeRoute: ActivatedRoute,
     private router: Router){
     this.solutionService=solutionService;
     this.http=http;
   }
-  
+
   ngOnInit(): void {
     this.commonProblemId=this.activeRoute.snapshot.params['commonProblemId'];
- 
+    this.solution.commonProblemId=this.activeRoute.snapshot.params['commonProblemId'];
+    console.log("Fetched Problem id from route is "+this.solution.commonProblemId)
     this.solutionService.solutionChanged.subscribe(
       ()=>{
         this.solution=this.solutionService.getSolution();
       }
     );
-    
+
   }
   onSubmit(submitedForm:NgForm){
       console.log(submitedForm);
       this.solution=submitedForm.value;
       this.solutionService.saveSolution(this.solution);
+      //** for some unknown reason this.solution.commonProblemId returns undefined here.However, we have already set it in init???
+      console.log("this.solution.commonProblemId used for fetchSolutionForGivenProblem : "+this .commonProblemId);
       this.solutionService.fetchSolutionForGivenProblem(this.commonProblemId);
 
   }
@@ -52,8 +56,8 @@ export class SolutionComponent implements OnInit{
         console.log("solution from service");
         console.log(this.solution);
         console.log("solution");
-   
-        
+
+
       }
     );
   }
@@ -64,11 +68,13 @@ export class SolutionComponent implements OnInit{
   clearForm(){
     this.solution={
       "solutionId": "","solDescription": "",
-      "seqNumber": ""
+      "seqNumber": "",
+      "commonProblemId":this.solution.commonProblemId
+
       };
-    
+
   }
-  
+
   // clearForm(){
   //   this.application={"applicationId":"","applDescription":"","applName":""};
   // }
