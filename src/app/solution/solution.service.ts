@@ -34,7 +34,7 @@ export class SolutionService {
       }
     );
   }
- 
+
   deleteSolution(solutionId: any) {
 
       this.http.delete(this.solutionUrl+solutionId).subscribe(
@@ -48,10 +48,10 @@ export class SolutionService {
   solutionList :any;
   solution:any;
   http:HttpClient;
-  solutionListChanged= new Subject<void>(); 
-  solutionChanged=new Subject<void>(); 
+  solutionListChanged= new Subject<void>();
+  solutionChanged=new Subject<void>();
   constructor(http:HttpClient) {this.http=http; }
-  
+
   // fetchSolutionList(){
   //   this.http.get('/solutionController/allSolutions/').subscribe(
   //     (response: any) => {
@@ -62,7 +62,7 @@ export class SolutionService {
   //     this.solutionListChanged.next();
   //     }
   //     );
-     
+
   // }
   getSolutionList(){
     return this.solutionList;

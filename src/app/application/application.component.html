@@ -2,14 +2,14 @@
 
 <form (ngSubmit)="onSubmit(form)" #form="ngForm">
     <div class="mb-3">
-      <label for="applName" class="form-label">Application Name</label>
-      <input type="text" class="form-control" id="applName" 
-      
-      
+      <label for="applName" class="form-label">Application Name</label>s
+      <input type="text" class="form-control" id="applName"
+
+
       [(ngModel)]="application.applName"
-      name="applName"  >  
-      
-      
+      name="applName"  >
+
+
     </div>
     <div class="mb-3">
       <label for="applDescription" class="form-label">Applicaiton Description</label>
@@ -18,7 +18,7 @@
     <div class="mb-3 form-check">
       <!-- <label for="applicationId"> Applicaiton ID</label> -->
       <input type="hidden" class="form-control" id="applicationId" [(ngModel)]="application.applicationId" name="applicationId" >
-     
+
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
     &nbsp;

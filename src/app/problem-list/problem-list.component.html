@@ -2,10 +2,10 @@
 <table class="table">
     <thead>
       <tr>
-        
+
         <th scope="col">Application ID</th>
         <th scope="col">Application Description</th>
-       
+
         <th scope="col">Problem Id</th>
         <th scope="col">Problem Description</th>
         <th scope="col">Action</th>
@@ -13,7 +13,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let problemMap of problemList">
-        
+
         <td>{{problemMap.application.applicationId}}</td>
         <td>{{problemMap.application.applDescription}}</td>
         <td>{{problemMap.commonProblem.commonProblemId}}</td>
@@ -23,13 +23,16 @@
           &nbsp;
           <button type="button" class="btn btn-primary" (click)="editCommonProblem(problemMap.commonProblem.commonProblemId)">Edit</button>
           &nbsp;
+          <button  type="button" class="btn btn-primary" (click)="showSolutions(problemMap.commonProblem.commonProblemId,problemMap.application.applicationId)">Add Solutions </button>
+
+          &nbsp;
           <button *ngIf="problemMap.commonProblem.solutions.length!=0" type="button" class="btn btn-primary" (click)="showSolutions(problemMap.commonProblem.commonProblemId,problemMap.application.applicationId)">Show Solutions ({{problemMap.commonProblem.solutions.length}})</button>
-        
+
 
         </td>
-        
+
       </tr>
 
-      
+
     </tbody>
   </table>

@@ -42,7 +42,7 @@ const routes = [
 // { path: 'commonSolution', component: SolutionComponent },
 
 
-//   ] 
+//   ]
 // },
 
 //    ];
@@ -69,7 +69,7 @@ const routes = [
     otherwise there will be no hashtag and the urls will be rendered at server end and will always result isn page not found
    */
     RouterModule.forRoot(routes ,{ useHash: true })
-   
+
   ],
   providers: [ApplicationService, CommonProblemService, SolutionService,
     //provideRouter(routes)
